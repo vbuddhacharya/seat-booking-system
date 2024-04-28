@@ -7,14 +7,12 @@
     @apply border-purple-400;
 }
 
+
+
 .input{
     @apply px-3 py-2 rounded-md border-2 primary-border hover:outline hover:outline-2 hover:outline-purple-500 focus:outline focus:outline-2 focus:outline-purple-500 w-full; 
 }
 
 .button{
     @apply w-full bg-purple-400 p-2 rounded-md text-base font-semibold hover:bg-purple-500 mt-5;
-}
-
-.nav-list{
-    @apply block font-medium text-center h-10 hover:bg-gray-200 flex items-center justify-center p-7 cursor-pointer text-purple-500
 }
