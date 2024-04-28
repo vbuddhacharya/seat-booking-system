@@ -1,24 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create Account</title>
-</head>
-<body>
-    <nav></nav>
-    <main>
-        <div>
-            <form action="{{route('create')}}" method="post">
+
+@extends('layout.app')
+@php
+    $value="Name"
+@endphp
+@section('content')
+    <main class="flex h-full justify-center items-center">
+        <div class="mx-auto w-1/3 pt">
+            <span class="font-bold text-2xl text-center w-full block">Register</span>
+            <form action="{{ route('create') }}" method="post" class="space-y-2">
                 @csrf
-                Name: <input type="text" name="name" id="name"><br>
-                Contact: <input type="number" name="contact" id="contact"><br>
-                Email: <input type="email" name="email" id="email"><br>
-                Password: <input type="password" name="password" id="password"><br>
-                <button type="submit">Create</button>
+                <x-form.input :label="$value" name="name" helper="Enter your full name."/>
+                <x-form.input label="Contact" name="contact" helper="Contact must be of 10 digits." type="contact"/>
+                <x-form.input label="Email" name="email" helper="Enter a valid email address." type="email"/>
+                <x-form.input label="Password" name="password" helper="Password must be at least 8 characters." type="password"/>
+                <button class="button" type="submit">Create Account</button>
+                <div class="w-full text-center mt-2"><span>Already have an account? </span><a href="{{route('login')}}" class="font-medium text underline">Login</a></div>
             </form>
         </div>
     </main>
-</body>
-</html>
+@endsection
