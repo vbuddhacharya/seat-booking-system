@@ -14,3 +14,7 @@
 .button{
     @apply w-full bg-purple-400 p-2 rounded-md text-base font-semibold hover:bg-purple-500 mt-5;
 }
+
+.nav-list{
+    @apply block font-medium text-center h-10 hover:bg-gray-200 flex items-center justify-center p-7 cursor-pointer text-purple-500
+}
