@@ -7,6 +7,9 @@
     @apply border-purple-400;
 }
 
+.bg-primary{
+    @apply bg-purple-500;
+}
 
 
 .input{
@@ -14,5 +17,5 @@
 }
 
 .button{
-    @apply w-full bg-purple-400 p-2 rounded-md text-base font-semibold hover:bg-purple-500 mt-5;
+    @apply bg-purple-400 p-3 rounded-md text-base font-semibold hover:bg-purple-500 mt-5;
 }

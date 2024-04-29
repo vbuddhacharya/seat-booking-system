@@ -178,7 +178,7 @@
                 <li class="w-full">
                     <a href="{{ route('admin.movies') }}" @class([
                         'text-purple-600 bg-purple-50' =>
-                            request()->fullUrl() === route('admin.movies'),
+                            request()->is('admin/movies/*') || request()->is('admin/movies'),
                         'hover:text-purple-600 hover:bg-purple-50 w-full px-5 py-3 rounded-md flex items-center space-x-5',
                     ])>
                         <x-icon name="film" />
@@ -188,7 +188,7 @@
                 <li class="w-full">
                     <a href="{{ route('admin.theatres') }}" @class([
                         'text-purple-600 bg-purple-50' =>
-                            request()->fullUrl() === route('admin.theatres'),
+                            request()->is('admin/theatres/*') || request()->is('admin/theatres'),
                         'hover:text-purple-600 hover:bg-purple-50 w-full px-5 py-3 rounded-md flex items-center space-x-5',
                     ])>
                         <x-icon name="theatre" />

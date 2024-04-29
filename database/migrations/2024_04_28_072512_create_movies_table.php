@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('genre');
             $table->date('release_date');
-            $table->bigInteger('imdb_id');
+            $table->string('imdb_id');
             $table->timestamps();
         });
     }
