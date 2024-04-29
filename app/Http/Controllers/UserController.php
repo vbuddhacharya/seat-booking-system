@@ -14,30 +14,20 @@ class UserController extends Controller
 {
     public function login(LoginUserRequest $request)
     {
-        if ( Auth::attempt($request->validated())){
+        if (!Auth::attempt($request->validated())) {
 
-            $request->session()->regenerate();
-
-            return redirect()->route('admin.dashboard');
+            return redirect()->back()->with("error", "Error logging in!");
         }
 
-        else{
-
-            return view('login');
-        }
+        return redirect()->route('admin.dashboard');
     }
 
-    public function register(StoreUserRequest $request){
-        
-        $request = $request->validated();
+    public function register(StoreUserRequest $request)
+    {
+        $user = User::create(
+            $request->all()
+        );
 
-        $user = User::create([
-                'name'=> $request['name'], 
-                'email' => $request['email'], 
-                'password'=> Hash::make($request['password']), 
-                'contact' => $request['contact']
-            ]);
-
-        return view('login');
+        return redirect()->route('admin.dashboard');
     }
 }
