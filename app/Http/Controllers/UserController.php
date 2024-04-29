@@ -12,28 +12,32 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function viewLogin(){
-        return view('login');
-    }
-    public function verifyLogin(LoginUserRequest $request){
+    public function login(LoginUserRequest $request)
+    {
         if ( Auth::attempt($request->validated())){
+
             $request->session()->regenerate();
+
             return redirect()->route('admin.dashboard');
         }
-        else
+
+        else{
+
             return view('login');
+        }
     }
-    public function viewRegister(){
-        return view('register');
-    }
-    public function createUser(StoreUserRequest $request){
+
+    public function register(StoreUserRequest $request){
+        
         $request = $request->validated();
+
         $user = User::create([
                 'name'=> $request['name'], 
                 'email' => $request['email'], 
                 'password'=> Hash::make($request['password']), 
                 'contact' => $request['contact']
             ]);
+
         return view('login');
     }
 }

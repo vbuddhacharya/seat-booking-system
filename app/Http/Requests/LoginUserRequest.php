@@ -23,7 +23,7 @@ class LoginUserRequest extends FormRequest
     {
         return [
             'email' => ['required','email:filter','exists:App\Models\User,email'],
-            'password' => ['required','min:8','string'],
+            'password' => ['required'],
         ];
     }
 }

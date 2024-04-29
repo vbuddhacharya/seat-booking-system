@@ -7,10 +7,10 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('login',[UserController::class,'viewLogin'])->name('login');
-Route::get('register',[UserController::class,'viewRegister'])->name('register');
-Route::post('login',[UserController::class,'verifyLogin'])->name('verify');
-Route::post('register',[UserController::class,'createUser'])->name('create');
+Route::view('login','login')->name('login');
+Route::view('register','register')->name('register');
+Route::post('login',[UserController::class,'login'])->name('verify');
+Route::post('register',[UserController::class,'register'])->name('create');
 Route::group(['prefix'=>'admin', 'as'=>'admin.'],function(){
     Route::get('dashboard',[DashboardController::class,'viewDashboard'])->name('dashboard');
 });
