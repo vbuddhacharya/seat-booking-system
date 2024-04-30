@@ -14,15 +14,17 @@
                 </span>
             </div>
         @endif
-        <form action="{{route('admin.updatemovie',$movie->id)}}" method="post" class="space-y-2" enctype="multipart/form-data">
+        <form action="{{ route('admin.movies.update', $movie->id) }}" method="post" class="space-y-2"
+            enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <x-form.input label="Title" name="name" value="{{ $movie->name }}" required="true" />
             <x-form.input label="Genre" name="genre" value="{{ $movie->genre }}" required="true" />
             <x-form.input label="Release Date" name="release_date" type="date" value="{{ $movie->release_date }}"
                 required="true" />
             <x-form.input label="IMDB ID" name="imdb_id" value="{{ $movie->imdb_id }}" required="true" />
-            <x-form.input label="Poster" name="poster" type="file" class="file-input file-input-bordered w-full" value="{{$movie->poster}}" />
-            <input type="hidden" name="_method" value="PUT">
+            <x-form.input label="Poster" name="poster" type="file" class="file-input file-input-bordered w-full"
+                value="{{ $movie->poster }}" />
             <button type="submit" class="button w-1/3">Update</button>
         </form>
     </div>

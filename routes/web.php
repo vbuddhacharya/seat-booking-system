@@ -16,14 +16,15 @@ Route::view('register', 'register')->name('register');
 Route::post('login', [UserController::class, 'login'])->name('verify');
 Route::post('register', [UserController::class, 'register'])->name('create');
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::view("dashboard","dashboard")->name('dashboard');
     
-    Route::get('theatres',[TheatreController::class,'viewTheatres'])->name('theatres');
+    Route::view("dashboard", "dashboard")->name('dashboard');
 
-    Route::get('movies',[MovieController::class,'viewMovies'])->name('movies');
-    Route::post('movies',[MovieController::class,'storeMovie'])->name('storemovie');
-    Route::view('movies/create',"movies.create")->name('addmovies');
-    Route::get('/movies/{id}/edit',[MovieController::class,'editMovie'])->name('editmovie');
-    Route::put('/movies/{id}',[MovieController::class,'updateMovie'])->name('updatemovie');
-    Route::delete('/movies/{id}',[MovieController::class,'deleteMovie'])->name('deletemovie');
+    Route::get('theatres', [TheatreController::class, 'viewTheatres'])->name('theatres');
+
+    Route::get('movies', [MovieController::class, 'index'])->name('movies.index');
+    Route::post('movies', [MovieController::class, 'store'])->name('movies.store');
+    Route::view('movies/create', "movies.create")->name('movies.create');
+    Route::get('/movies/{movie}/edit', [MovieController::class, 'edit'])->name('movies.edit');
+    Route::put('/movies/{movie}', [MovieController::class, 'update'])->name('movies.update');
+    Route::delete('/movies/{movie}', [MovieController::class, 'delete'])->name('movies.delete');
 });

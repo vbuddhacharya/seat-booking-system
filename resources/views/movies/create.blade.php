@@ -14,11 +14,11 @@
                 </span>
             </div>
         @endif
-        <form action="{{ route('admin.storemovie') }}" method="post" class="space-y-2" enctype="multipart/form-data">
+        <form action="{{ route('admin.movies.store') }}" method="post" class="space-y-2" enctype="multipart/form-data">
             @csrf
             <x-form.input label="Title" name="name" required="true" />
             <x-form.input label="Genre" name="genre" required="true" />
-            <x-form.input label="Release Date" name="release_date" type="date" required="true"/>
+            <x-form.input label="Release Date" name="release_date" type="date" required="true" />
             <x-form.input label="IMDB ID" name="imdb_id" required="true" />
             <x-form.input label="Poster" name="poster" type="file" class="file-input file-input-bordered w-full" />
             <button type="submit" class="button">Create</button>

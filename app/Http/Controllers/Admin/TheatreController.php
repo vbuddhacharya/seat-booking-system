@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class TheatreController extends Controller
 {
-    public function viewTheatres(){
+    public function viewTheatres()
+    {
         return view('theatres.index');
     }
 }
