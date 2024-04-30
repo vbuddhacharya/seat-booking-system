@@ -16,10 +16,10 @@ Route::view('register', 'register')->name('register');
 Route::post('login', [UserController::class, 'login'])->name('verify');
 Route::post('register', [UserController::class, 'register'])->name('create');
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    
+
     Route::view("dashboard", "dashboard")->name('dashboard');
 
-    Route::get('theatres', [TheatreController::class, 'viewTheatres'])->name('theatres');
+    Route::resource('theatres', TheatreController::class);
 
     Route::get('movies', [MovieController::class, 'index'])->name('movies.index');
     Route::post('movies', [MovieController::class, 'store'])->name('movies.store');

@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li class="w-full">
-                    <a href="{{ route('admin.theatres') }}" @class([
+                    <a href="{{ route('admin.theatres.index') }}" @class([
                         'text-purple-600 bg-purple-50' =>
                             request()->is('admin/theatres/*') || request()->is('admin/theatres'),
                         'hover:text-purple-600 hover:bg-purple-50 w-full px-5 py-3 rounded-md flex items-center space-x-5',
@@ -44,6 +44,7 @@
         </div>
         <div class="bg-gray-200 w-4/5 h-screen py-5 px-8">
             <span class="block font-bold text-4xl pt-4 pb-8">{{ $title ?? null }}</span>
+            <x-notification />
             @yield('admin-content')
         </div>
     @endsection
