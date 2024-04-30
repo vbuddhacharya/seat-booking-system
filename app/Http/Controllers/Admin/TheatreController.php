@@ -33,6 +33,13 @@ class TheatreController extends Controller
         return view('theatres.edit', compact('theatre'));
     }
 
+    public function update(StoreTheatreRequest $request, Theatre $theatre)
+    {
+        $theatre->update($request->validated());
+
+        return redirect()->route('admin.theatres.index')->with('success','Theatre updated successfully!');
+    }
+
     public function destroy(Theatre $theatre)
     {
         $theatre->delete();

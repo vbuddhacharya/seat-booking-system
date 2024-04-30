@@ -1,9 +1,9 @@
-@extends('layout.admin',[
+@extends('layout.admin', [
     'title' => 'Create Theatre',
 ])
 
 @section('admin-content')
-    <div class="w-1/2 m-auto">
+    <div class="w-1/2">
         @if (session()->has('success'))
             <div role="alert" class="alert">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6">
