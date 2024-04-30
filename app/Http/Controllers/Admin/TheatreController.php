@@ -25,7 +25,7 @@ class TheatreController extends Controller
     {
         $theatre = Theatre::create($request->validated());
 
-        return redirect()->route('admin.theatres.index');
+        return redirect()->route('admin.theatres.index')->with('success', 'Theatre created successfully!');
     }
 
     public function edit(Theatre $theatre)
@@ -37,13 +37,13 @@ class TheatreController extends Controller
     {
         $theatre->update($request->validated());
 
-        return redirect()->route('admin.theatres.index')->with('success','Theatre updated successfully!');
+        return redirect()->route('admin.theatres.index')->with('success', 'Theatre updated successfully!');
     }
 
     public function destroy(Theatre $theatre)
     {
         $theatre->delete();
 
-        return redirect()->route('admin.theatres.index')->with('success', 'Movie deleted successfully');
+        return redirect()->route('admin.theatres.index')->with('success', 'Theatre deleted successfully');
     }
 }
