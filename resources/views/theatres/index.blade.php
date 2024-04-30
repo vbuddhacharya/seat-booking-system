@@ -1,5 +1,5 @@
 @extends('layout.admin',[
-    'title' => 'Dashboard'
+    'title' => 'Theatres'
 ])
 
 @section('admin-content')
