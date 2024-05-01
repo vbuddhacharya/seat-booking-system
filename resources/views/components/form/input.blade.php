@@ -4,7 +4,7 @@
     'helper' => null,
     'placeholder' => null,
     'type' => 'text',
-    'class' => 'input',
+    'class' => 'text-input',
     'value' => null,
     'required' => false,
 ])

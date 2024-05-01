@@ -12,7 +12,7 @@
 }
 
 
-.input{
+.text-input{
     @apply px-3 py-2 rounded-md border-2 primary-border hover:outline hover:outline-2 hover:outline-purple-500 focus:outline focus:outline-2 focus:outline-purple-500 w-full; 
 }
 
