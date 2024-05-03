@@ -11,7 +11,7 @@ class TheatreController extends Controller
 {
     public function index()
     {
-        $theatres = Theatre::paginate(2);
+        $theatres = Theatre::paginate(5);
 
         return view('theatres.index', compact('theatres'));
     }
