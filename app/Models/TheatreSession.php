@@ -15,6 +15,7 @@ class TheatreSession extends Model
         'date',
         'movie_id',
         'theatre_id',
+        'status',
     ];
     public function theatre(){
         return $this->belongsTo(Theatre::class);

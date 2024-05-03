@@ -4,7 +4,7 @@
 
 @section('admin-content')
     <div class="flex justify-end">
-        <a href="{{ route('admin.theatres.create') }}"
+        <a href="{{ route('admin.theatre-sessions.create') }}"
             class="border text-gray-100 border-purple-400 rounded-lg p-2 mb-2 bg-primary">Create Theatre Session</a>
     </div>
 
@@ -42,10 +42,10 @@
                         <td> {{ $session->status }}
                         </td>
                         <th>
-                            <form action="/" method="get">
+                            <form action="{{route('admin.theatre-sessions.edit', ['theatre_session' => $session->id])}}" method="get">
                                 <button class="btn btn-ghost btn-xs">Edit</button>
                             </form>
-                            <form action="/" method="post">
+                            <form action="{{route('admin.theatre-sessions.destroy', ['theatre_session' => $session->id])}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-ghost btn-xs" onclick="return beforeDelete()">Delete</button>
