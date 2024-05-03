@@ -12,4 +12,9 @@ class Theatre extends Model
         'name',
         'capacity'
     ];
+
+    public function theatre_sessions()
+    {
+        return $this->hasMany(TheatreSession::class);
+    }
 }

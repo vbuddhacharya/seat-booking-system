@@ -46,6 +46,17 @@
                         <span>Theatres</span>
                     </a>
                 </li>
+                <li class="w-full">
+                    <a href="{{ route('admin.theatre-sessions.index') }}" @class([
+                        'text-purple-600 bg-purple-50' =>
+                            request()->is('admin/theatre-sessions/*') || request()->is('admin/theatre-sessions'),
+                        'hover:text-purple-600 hover:bg-purple-50 w-full px-5 py-3 rounded-md flex items-center space-x-5',
+                    ])>
+                        <x-icon name="theatreSession" />
+                        <span>Theatre Sessions</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
         <div class="bg-gray-200 w-4/5 h-screen py-5 px-8">
