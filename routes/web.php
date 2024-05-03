@@ -30,5 +30,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::delete('/movies/{movie}', [MovieController::class, 'delete'])->name('movies.delete');
 
     Route::get('thirdparty',[ThirdPartyAPIController::class,'index'])->name('thirdparty.index');
+    Route::get('thirdparty/discover',[ThirdPartyAPIController::class,'discover'])->name('thirdparty.discover');
+    Route::post('thirdparty/store',[ThirdPartyAPIController::class,'store'])->name('thirdparty.store');
     Route::get('thirdparty/{movie}',[ThirdPartyAPIController::class,'show'])->name('thirdparty.show');
 });

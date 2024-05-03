@@ -7,28 +7,21 @@ use Illuminate\Support\Facades\Http;
 
 class TMDBService
 {
-    
-    // public function index($page,$genreId,$movieName)
-    // {
-    //     if ($movieName == null){
-    //         $movies = Http::withToken(config('services.tmdb.token'))
-    //         ->get("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&sort_by=popularity.desc&", ['page' => $page, 'with_genres' => $genreId])
-    //         ->json();
-    //     }
-    //     else{
-    //         $movies = Http::withToken(config('services.tmdb.token'))
-    //         ->get("https://api.themoviedb.org/3/search/movie&",['page' => $page, 'query' => $movieName])
-    //         ->json();
-    //     }
-    //     // dd($movies);
 
-    //     return $movies;
-    // }
-    public function index($page = 1, $genreId=0, $movieName){
-        // dd($movieName);
+    public function discover($page, $genreId = 0)
+    {
         $movies = Http::withToken(config('services.tmdb.token'))
-            ->get("https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1",['query' => $movieName])
+            ->get("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&sort_by=popularity.desc&", ['page' => $page, 'with_genres' => $genreId])
             ->json();
+
+        return $movies;
+    }
+    public function index($page, $genreId, $movieName)
+    {
+        $movies = Http::withToken(config('services.tmdb.token'))
+            ->get("https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US", ['page' => $page, 'query' => $movieName])
+            ->json();
+
         // dd($movies);
         return $movies;
     }
@@ -41,6 +34,23 @@ class TMDBService
         $genres = collect($allGenres)->mapWithKeys(function (array $item, int $key) {
             return [$item['id'] => $item['name']];
         });
+        // dd($genres);
         return $genres;
+    }
+
+    public function getPages($totalPages, $page)
+    {
+        $pagesNum = 5;
+        $pages = [];
+        $minPage = $page - $pagesNum;
+        $maxPage = $page + $pagesNum;
+        $maxPage = ($maxPage > $totalPages) ? $totalPages : $maxPage;
+        for ($i = $minPage; $i <= $maxPage; $i++) {
+            if ($i < 1 || $i > 500)
+                continue;
+            $pages[] = $i;
+        }
+
+        return $pages;
     }
 }
