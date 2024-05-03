@@ -22,12 +22,11 @@ class StoreTheatreSessionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'movie_id' => ['required', 'exists:movies,id'], 
-            'theatre_id' => ['required', 'exists:theatres,id'], 
-            'date' => ['required','date'],
+            'movie_id' => ['required', 'exists:movies,id'],
+            'theatre_id' => ['required', 'exists:theatres,id'],
+            'date' => ['required', 'date'],
             'start_time' => ['required'],
             'end_time' => ['required'],
-            'status' => ['required'],
         ];
     }
 }

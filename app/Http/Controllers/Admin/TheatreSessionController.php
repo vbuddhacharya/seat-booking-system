@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\StatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTheatreSessionRequest;
 use App\Models\Movie;
@@ -14,7 +15,7 @@ class TheatreSessionController extends Controller
 {
     public function index()
     {
-        $theatreSessions = TheatreSession::orderByRaw("FIELD(status,'Running','Upcoming','Completed')")->orderBy('date')->paginate(10);
+        $theatreSessions = TheatreSession::orderBy('date')->paginate(10);
 
         return view('theatreSessions.index', compact('theatreSessions'));
     }
@@ -27,9 +28,11 @@ class TheatreSessionController extends Controller
         return view('theatreSessions.create', compact('movies', 'theatres'));
     }
 
-    public function store(StoreTheatreSessionRequest $request)
+    public function store(StoreTheatreSessionRequest $request, TheatreSessionService $service)
     {
-        // dd($request->validated());
+        if (!$service->correctTime($request->start_time, $request->end_time)) {
+            return redirect()->back()->with('error', 'Please try again');
+        }
         $theatreSession = TheatreSession::create($request->validated());
 
         return redirect()->route('admin.theatre-sessions.index')->with('success', 'Theatre Session created successfully');
@@ -39,6 +42,7 @@ class TheatreSessionController extends Controller
     {
         $movies = $service->getMovies();
         $theatres = $service->getTheatres();
+
         return view('theatreSessions.edit', compact('theatreSession', 'movies', 'theatres'));
     }
 

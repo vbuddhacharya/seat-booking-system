@@ -17,7 +17,6 @@
                     <th>Theatre Name</th>
                     <th>Start Time</th>
                     <th>End Time</th>
-                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -39,13 +38,14 @@
                         <td>
                             {{ $session->end_time }}
                         </td>
-                        <td> {{ $session->status }}
-                        </td>
+
                         <th>
-                            <form action="{{route('admin.theatre-sessions.edit', ['theatre_session' => $session->id])}}" method="get">
+                            <form action="{{ route('admin.theatre-sessions.edit', ['theatre_session' => $session->id]) }}"
+                                method="get">
                                 <button class="btn btn-ghost btn-xs">Edit</button>
                             </form>
-                            <form action="{{route('admin.theatre-sessions.destroy', ['theatre_session' => $session->id])}}" method="post">
+                            <form action="{{ route('admin.theatre-sessions.destroy', ['theatre_session' => $session->id]) }}"
+                                method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-ghost btn-xs" onclick="return beforeDelete()">Delete</button>

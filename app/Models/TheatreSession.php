@@ -15,13 +15,14 @@ class TheatreSession extends Model
         'date',
         'movie_id',
         'theatre_id',
-        'status',
     ];
-    public function theatre(){
+    public function theatre()
+    {
         return $this->belongsTo(Theatre::class);
     }
 
-    public function movie(){
+    public function movie()
+    {
         return $this->belongsTo(Movie::class);
     }
 }

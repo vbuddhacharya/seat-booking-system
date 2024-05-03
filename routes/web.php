@@ -30,5 +30,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::put('/movies/{movie}', [MovieController::class, 'update'])->name('movies.update');
     Route::delete('/movies/{movie}', [MovieController::class, 'delete'])->name('movies.delete');
 
-    Route::resource('theatre-sessions',TheatreSessionController::class);
+    Route::resource('theatre-sessions', TheatreSessionController::class);
 });
