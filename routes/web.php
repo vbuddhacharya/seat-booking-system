@@ -15,6 +15,7 @@ Route::view('login', 'login')->name('login');
 Route::view('register', 'register')->name('register');
 Route::post('login', [UserController::class, 'login'])->name('verify');
 Route::post('register', [UserController::class, 'register'])->name('create');
+Route::get('logout',[UserController::class,'logout'])->name('logout');
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::view("dashboard", "dashboard")->name('dashboard');
