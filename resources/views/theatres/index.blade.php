@@ -43,6 +43,10 @@
 
             </tbody>
         </table>
+        <div class="mt-3">
+            {{ $theatres->links() }}
+
+        </div>
     </div>
     <script>
         function beforeDelete() {

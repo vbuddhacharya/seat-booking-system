@@ -6,21 +6,21 @@
 @endif
 
 @if (session()->has('error'))
-    <div role="alert" class="alert-error">
+    <div class="alert-error">
         <x-icon name="error" />
         <span>{{ session()->get('error') }}</span>
     </div>
 @endif
 
 @if (session()->has('warning'))
-    <div role="alert" class="alert-warning">
+    <div class="alert-warning">
         <x-icon name="warning" />
         <span>{{ session()->get('warning') }}</span>
     </div>
 @endif
 
 @if (session()->has('info'))
-    <div role="alert" class="alert-info">
+    <div class="alert-info">
         <x-icon name="info" />
         <span>{{ session()->get('info') }}</span>
     </div>
