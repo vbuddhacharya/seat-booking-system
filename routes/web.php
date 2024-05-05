@@ -5,18 +5,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\TheatreController;
+use App\Http\Middleware\LoggedIn;
 use App\Models\Movie;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('login', 'login')->name('login');
+Route::view('login', 'login')->name('login')->middleware(LoggedIn::class);
 Route::view('register', 'register')->name('register');
 Route::post('login', [UserController::class, 'login'])->name('verify');
 Route::post('register', [UserController::class, 'register'])->name('create');
 Route::get('logout',[UserController::class,'logout'])->name('logout');
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
 
     Route::view("dashboard", "dashboard")->name('dashboard');
 
