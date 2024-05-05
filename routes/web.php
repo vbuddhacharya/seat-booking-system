@@ -9,9 +9,7 @@ use App\Http\Controllers\Admin\TheatreSessionController;
 use App\Http\Controllers\SeatController;
 use App\Models\Movie;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\Customer\MovieController::class, 'index'])->name('index');
 
 Route::get('login', [UserController::class, 'viewLogin'])->name('login');
 Route::get('register', [UserController::class, 'viewRegister'])->name('register');

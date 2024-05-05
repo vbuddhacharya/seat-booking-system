@@ -1,5 +1,5 @@
-@extends('layout.app')
+@extends('layout.customer')
 
-@section('content')
-
+@section('customer-content')
+    
 @endsection
