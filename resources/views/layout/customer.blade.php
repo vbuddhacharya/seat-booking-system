@@ -7,5 +7,9 @@
             {{-- <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" class="rounded-full h-4/5" /> --}}
         </div>
     </nav>
-    @yield('customer-content')
+    <div class="bg-gray-200 w-full h-screen py-5 px-8">
+        <span class="block font-bold text-4xl pt-4 pb-8">{{ $title ?? null }}</span>
+        <x-notification />
+        @yield('customer-content')
+    </div>
 @endsection
