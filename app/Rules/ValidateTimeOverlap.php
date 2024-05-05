@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidationRule;
 use App\Models\TheatreSession;
+use App\Services\TheatreSessionService;
 
 class ValidateTimeOverlap implements DataAwareRule, ValidationRule
 {
@@ -24,8 +25,9 @@ class ValidateTimeOverlap implements DataAwareRule, ValidationRule
     }
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $theatreSession = TheatreSession::where('date', $this->data['date'])->where('theatre_id', $this->data['theatre_id'])->where('start_time', '<=', $this->data['end_time'])->where('end_time', '>=', $this->data['start_time'])->count();
-        if ($theatreSession > 0) {
+        $service = new TheatreSessionService();
+        $isValidRange = $service->isValidRange($this->data);
+        if (!$isValidRange) {
             $fail('The time range is already taken.');
         }
     }

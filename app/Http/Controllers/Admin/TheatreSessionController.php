@@ -22,16 +22,13 @@ class TheatreSessionController extends Controller
 
     public function create(TheatreSessionService $service)
     {
-        $movies = Movie::pluck("name","id");
-        $theatres = Theatre::pluck("name","id");
+        $movies = Movie::pluck("name", "id");
+        $theatres = Theatre::pluck("name", "id");
         return view('theatreSessions.create', compact('movies', 'theatres'));
     }
 
     public function store(StoreTheatreSessionRequest $request, TheatreSessionService $service)
     {
-        if (!$service->correctTime($request->start_time, $request->end_time)) {
-            return redirect()->back()->with('error', 'Please try again');
-        }
         $theatreSession = TheatreSession::create($request->validated());
 
         return redirect()->route('admin.theatre-sessions.index')->with('success', 'Theatre Session created successfully');
@@ -39,8 +36,8 @@ class TheatreSessionController extends Controller
 
     public function edit(TheatreSession $theatreSession, TheatreSessionService $service)
     {
-        $movies = Movie::pluck("name","id");
-        $theatres = Theatre::pluck("name","id");
+        $movies = Movie::pluck("name", "id");
+        $theatres = Theatre::pluck("name", "id");
 
         return view('theatreSessions.edit', compact('theatreSession', 'movies', 'theatres'));
     }

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Carbon\Carbon;
 use App\Models\TheatreSession;
-
+use App\Services\TheatreSessionService;
 
 class ValidateTimeRange implements DataAwareRule, ValidationRule
 {
@@ -28,9 +28,9 @@ class ValidateTimeRange implements DataAwareRule, ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $startTime = Carbon::parse($this->data['start_time']);
-        $endTime = Carbon::parse($value);
-        if ($startTime->diffInMinutes($endTime) < 0) {
+        $service = new TheatreSessionService();
+        $isCorrectTime = $service->isCorrectTime($this->data['start_time'], $this->data['end_time']);
+        if (!$isCorrectTime) {
             $fail('Timing is inaccurate');
         }
     }

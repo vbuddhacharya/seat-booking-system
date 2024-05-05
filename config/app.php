@@ -124,6 +124,6 @@ return [
     ],
 
 
-    'show_error' => env('SHOW_ERROR_ON_BLADE'),
+    'show_error' => env('SHOW_ERROR_ON_BLADE', false),
 
 ];
