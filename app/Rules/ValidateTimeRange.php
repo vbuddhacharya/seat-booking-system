@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use App\Models\TheatreSession;
 
 
-class ValidateTime implements DataAwareRule, ValidationRule
+class ValidateTimeRange implements DataAwareRule, ValidationRule
 {
     /**
      * Run the validation rule.
@@ -31,10 +31,7 @@ class ValidateTime implements DataAwareRule, ValidationRule
         $startTime = Carbon::parse($this->data['start_time']);
         $endTime = Carbon::parse($value);
         if ($startTime->diffInMinutes($endTime) < 0) {
-            $fail('Timing is inaccurate') ;
+            $fail('Timing is inaccurate');
         }
-
-        // $theatreSession = TheatreSession::where('date', $this->data['date'])->andWhere('movie_id',$this->data['movie_id'])->get();
-
     }
 }

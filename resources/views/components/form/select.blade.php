@@ -22,5 +22,9 @@
             </option>
         @endforeach
     </select>
+    @error($name)
+        <span class="text-error font-semibold text-sm">{{ $message }}</span>
+    @enderror
     <span class="text-sm mt-1">{{ $helper }}</span>
+
 </div>

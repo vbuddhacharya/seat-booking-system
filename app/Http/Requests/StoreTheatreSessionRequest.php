@@ -2,7 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\ValidateTime;
+use App\Rules\ValidateTimeRange;
+use App\Rules\ValidateTimeOverlap;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTheatreSessionRequest extends FormRequest
@@ -27,7 +28,7 @@ class StoreTheatreSessionRequest extends FormRequest
             'theatre_id' => ['required', 'exists:theatres,id'],
             'date' => ['required', 'date'],
             'start_time' => ['required'],
-            'end_time' => ['required', new ValidateTime],
+            'end_time' => ['required', new ValidateTimeRange, new ValidateTimeOverlap],
         ];
     }
 }

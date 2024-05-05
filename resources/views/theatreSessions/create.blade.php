@@ -3,15 +3,6 @@
 ])
 
 @section('admin-content')
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     <div class="w-1/2">
         <form action="{{ route('admin.theatre-sessions.store') }}" method="post" class="space-y-2"
             enctype="multipart/form-data">
