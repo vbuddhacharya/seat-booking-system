@@ -12,6 +12,15 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function viewLogin()
+    {
+        if (Auth::check()) {
+
+            return redirect()->route('admin.dashboard');
+        }
+
+        return view('login');
+    }
     public function login(LoginUserRequest $request)
     {
         if (!Auth::attempt($request->validated())) {
@@ -21,7 +30,14 @@ class UserController extends Controller
 
         return redirect()->route('admin.dashboard');
     }
+    public function viewRegister(){
+        if (Auth::check()) {
 
+            return redirect()->route('admin.dashboard');
+        }
+
+        return view('register');
+    }
     public function register(StoreUserRequest $request)
     {
         $user = User::create(
@@ -29,5 +45,12 @@ class UserController extends Controller
         );
 
         return redirect()->route('admin.dashboard');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('login');
     }
 }
