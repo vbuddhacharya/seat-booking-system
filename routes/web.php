@@ -12,11 +12,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('login', 'login')->name('login')->middleware(LoggedIn::class);
-Route::view('register', 'register')->name('register');
+Route::get('login', [UserController::class,'viewLogin'])->name('login');
+Route::get('register', [UserController::class,'viewRegister'])->name('register');
 Route::post('login', [UserController::class, 'login'])->name('verify');
 Route::post('register', [UserController::class, 'register'])->name('create');
-Route::get('logout',[UserController::class,'logout'])->name('logout');
+Route::post('logout',[UserController::class,'logout'])->name('logout');
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
 
     Route::view("dashboard", "dashboard")->name('dashboard');

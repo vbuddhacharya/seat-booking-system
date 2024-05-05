@@ -4,9 +4,13 @@
     <nav>
         <div class="w-full h-16 flex justify-between items-center border border-b-gray-300">
             <span class="block h-full pt-4 font-bold ml-2 text-xl text-purple-500">Tickets!</span>
-            <a href="{{ route('logout') }}" class="h-full flex">
-                <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" class="rounded-full h-4/5 self-center" />
-            </a>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button class="h-4/5">
+                    <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}"
+                        class="rounded-full h-4/5 self-center" />
+                </button>
+            </form>
         </div>
     </nav>
     <main class="flex">
