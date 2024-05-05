@@ -15,4 +15,10 @@ class Movie extends Model
         'release_date',
         'imdb_id',
     ];
+
+    public function theatreSessions()
+    {
+        return $this->hasMany(TheatreSession::class);
+    }
+
 }

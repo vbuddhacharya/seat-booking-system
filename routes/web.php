@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\TheatreController;
-use App\Http\Middleware\LoggedIn;
+use App\Http\Controllers\Admin\TheatreSessionController;
 use App\Models\Movie;
 
 Route::get('/', function () {
@@ -29,4 +29,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::get('/movies/{movie}/edit', [MovieController::class, 'edit'])->name('movies.edit');
     Route::put('/movies/{movie}', [MovieController::class, 'update'])->name('movies.update');
     Route::delete('/movies/{movie}', [MovieController::class, 'delete'])->name('movies.delete');
+
+    Route::resource('theatre-sessions', TheatreSessionController::class);
 });

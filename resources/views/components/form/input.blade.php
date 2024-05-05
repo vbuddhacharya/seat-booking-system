@@ -17,5 +17,11 @@
     </label>
     <input type={{ $type }} name={{ $name }} id="{{ $name }}" class="{{ $class }}"
         placeholder="{{ $placeholder }}" value="{{ $value }}">
+
+    @error($name)
+        <span class="text-error font-semibold text-sm">{{ $message }}</span>
+    @enderror
+
     <span class="text-sm mt-1">{{ $helper }}</span>
+
 </div>
