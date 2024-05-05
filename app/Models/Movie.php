@@ -16,7 +16,7 @@ class Movie extends Model
         'imdb_id',
     ];
 
-    public function theatre_sessions()
+    public function theatreSessions()
     {
         return $this->hasMany(TheatreSession::class);
     }

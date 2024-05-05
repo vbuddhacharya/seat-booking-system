@@ -22,9 +22,8 @@ class TheatreSessionController extends Controller
 
     public function create(TheatreSessionService $service)
     {
-        $movies = $service->getMovies();
-        $theatres = $service->getTheatres();
-
+        $movies = Movie::pluck("name","id");
+        $theatres = Theatre::pluck("name","id");
         return view('theatreSessions.create', compact('movies', 'theatres'));
     }
 
@@ -40,8 +39,8 @@ class TheatreSessionController extends Controller
 
     public function edit(TheatreSession $theatreSession, TheatreSessionService $service)
     {
-        $movies = $service->getMovies();
-        $theatres = $service->getTheatres();
+        $movies = Movie::pluck("name","id");
+        $theatres = Theatre::pluck("name","id");
 
         return view('theatreSessions.edit', compact('theatreSession', 'movies', 'theatres'));
     }
