@@ -14,7 +14,7 @@
                 @foreach ($seats as $seat)
                     <tr>
                         <th>{{ $seat->number }}</th>
-                        <td>{{ $seat->status }}</td>
+                        <td>{{ $seat->status->getLabel() }}</td>
                         <th>
                             <form action="{{ route('admin.seats.edit', [$seat->theatreSession->id, $seat->id]) }}"
                                 method="get">

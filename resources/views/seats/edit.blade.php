@@ -9,7 +9,8 @@
             @csrf
             @method('PUT')
             <x-form.input label="Seat Number" name="number" value="{{ $seat->number }}" required="true" />
-            <x-form.select label="Status" name="status" :options="$statuses" selected="{{ $seat->status }}" required="true" />
+            <x-form.select label="Status" name="status" :options="$statuses" selected="{{ $seat->status->name }}"
+                required="true" />
             <button type="submit" class="button w-1/3">Update</button>
         </form>
     </div>

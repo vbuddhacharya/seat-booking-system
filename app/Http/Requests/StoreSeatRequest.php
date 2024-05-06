@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Enums\SeatStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
 class StoreSeatRequest extends FormRequest
@@ -25,7 +26,7 @@ class StoreSeatRequest extends FormRequest
     {
         return [
             'number' => ['required'],
-            'status' => ['required', new Enum(SeatStatus::class)]
+            'status' => ['required', Rule::in(collect(SeatStatus::cases())->pluck('name'))]
         ];
     }
 }

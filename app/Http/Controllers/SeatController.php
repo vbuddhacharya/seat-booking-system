@@ -23,10 +23,15 @@ class SeatController extends Controller
 
     public function edit(TheatreSession $theatreSession, Seat $seat)
     {
-        $statuses = [];
-        foreach (SeatStatus::cases() as $status) {
-            $statuses[$status->value] = $status->value;
-        }
+        $statuses = collect(SeatStatus::cases())->reduce(function ($carry, $value) {
+
+            $carry = $carry->merge([
+                $value->name => $value->getLabel()
+            ]);
+
+            return $carry;
+        }, collect());
+
         return view('seats.edit', compact('theatreSession', 'seat', 'statuses'));
     }
 

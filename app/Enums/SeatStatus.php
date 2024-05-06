@@ -2,10 +2,21 @@
 
 namespace App\Enums;
 
-enum SeatStatus: String
+enum SeatStatus
 {
-    case AVAILABLE = "Available";
-    case RESERVED = "Reserved";
-    case BOOKED = "Booked";
-    case UNAVAILABLE = "Unavailable";
+    case AVAILABLE;
+    case RESERVED;
+    case BOOKED;
+    case UNAVAILABLE;
+
+    public function getLabel()
+    {
+        return match ($this) {
+            self::AVAILABLE => "Available",
+            self::RESERVED => "Reserved",
+            self::BOOKED => "Booked",
+            self::UNAVAILABLE => "Unavailable",
+            default => "Undefined",
+        };
+    }
 }
