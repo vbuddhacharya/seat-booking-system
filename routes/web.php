@@ -16,18 +16,21 @@ Route::get('register', [UserController::class, 'viewRegister'])->name('register'
 Route::post('login', [UserController::class, 'login'])->name('verify');
 Route::post('register', [UserController::class, 'register'])->name('create');
 Route::post('logout', [UserController::class, 'logout'])->name('logout');
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth', 'namespace' => 'Admin'], function () {
 
     Route::view("dashboard", "dashboard")->name('dashboard');
 
     Route::resource('theatres', TheatreController::class);
 
-    Route::get('movies', [MovieController::class, 'index'])->name('movies.index');
-    Route::post('movies', [MovieController::class, 'store'])->name('movies.store');
-    Route::view('movies/create', "movies.create")->name('movies.create');
-    Route::get('/movies/{movie}/edit', [MovieController::class, 'edit'])->name('movies.edit');
-    Route::put('/movies/{movie}', [MovieController::class, 'update'])->name('movies.update');
-    Route::delete('/movies/{movie}', [MovieController::class, 'delete'])->name('movies.delete');
+    Route::group(['prefix' => 'movies', 'as' => 'movies.'], function(){
+        Route::get('/', [MovieController::class, 'index'])->name('index');
+        Route::post('/', [MovieController::class, 'store'])->name('store');
+        Route::view('create', "movies.create")->name('create');
+        Route::get('{movie}/edit', [MovieController::class, 'edit'])->name('edit');
+        Route::put('{movie}', [MovieController::class, 'update'])->name('update');
+        Route::delete('{movie}', [MovieController::class, 'delete'])->name('delete');
+    
+    });
 
     Route::get('theatre-sessions/{theatreSession}/seats', [SeatController::class, 'index'])->name('seats.index');
     Route::get('theatre-sessions/{theatreSession}/seats/{seat}/edit', [SeatController::class, 'edit'])->name('seats.edit');
@@ -35,3 +38,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::resource('theatre-sessions', TheatreSessionController::class);
 });
 
+Route::group(['namespace' => 'App\Http\Controllers\Customer'], function () {
+    Route::get('movies/{movie}/details',[App\Http\Controllers\Customer\MovieController::class,'show'])->name('movies.show');
+});
