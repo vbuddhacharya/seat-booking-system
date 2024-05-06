@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\TheatreController;
 use App\Http\Controllers\Admin\TheatreSessionController;
+use App\Http\Controllers\SeatController;
 use App\Models\Movie;
 
 Route::get('/', function () {
@@ -30,5 +31,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::put('/movies/{movie}', [MovieController::class, 'update'])->name('movies.update');
     Route::delete('/movies/{movie}', [MovieController::class, 'delete'])->name('movies.delete');
 
+    Route::get('theatre-sessions/{theatreSession}/seats',[SeatController::class,'index'])->name('seats.index');
+
     Route::resource('theatre-sessions', TheatreSessionController::class);
+
 });
+

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Movie;
 use App\Models\Theatre;
+use App\Models\Seat;
 use Carbon\Carbon;
 use App\Models\TheatreSession;
 
@@ -33,5 +34,17 @@ class TheatreSessionService
             return false;
         }
         return true;
+    }
+
+    public function createSeats(TheatreSession $theatreSession)
+    {
+        $capacity = $theatreSession->theatre->capacity;
+        for ($i = 1; $i <= $capacity; $i++) {
+            $seat = new Seat();
+            $seat->number = $i;
+            $seat->theatre_session_id = $theatreSession->id;
+            $seat->status = "Available";
+            $seat->save();
+        }
     }
 }
