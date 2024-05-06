@@ -13,11 +13,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login', [UserController::class,'viewLogin'])->name('login');
-Route::get('register', [UserController::class,'viewRegister'])->name('register');
+Route::get('login', [UserController::class, 'viewLogin'])->name('login');
+Route::get('register', [UserController::class, 'viewRegister'])->name('register');
 Route::post('login', [UserController::class, 'login'])->name('verify');
 Route::post('register', [UserController::class, 'register'])->name('create');
-Route::post('logout',[UserController::class,'logout'])->name('logout');
+Route::post('logout', [UserController::class, 'logout'])->name('logout');
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
 
     Route::view("dashboard", "dashboard")->name('dashboard');
@@ -31,9 +31,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::put('/movies/{movie}', [MovieController::class, 'update'])->name('movies.update');
     Route::delete('/movies/{movie}', [MovieController::class, 'delete'])->name('movies.delete');
 
-    Route::get('theatre-sessions/{theatreSession}/seats',[SeatController::class,'index'])->name('seats.index');
-
+    Route::get('theatre-sessions/{theatreSession}/seats', [SeatController::class, 'index'])->name('seats.index');
+    Route::get('theatre-sessions/{theatreSession}/seats/{seat}/edit', [SeatController::class, 'edit'])->name('seats.edit');
+    Route::put('theatre-sessions/{theatreSession}/seats/{seat}', [SeatController::class, 'update'])->name('seats.update');
     Route::resource('theatre-sessions', TheatreSessionController::class);
-
 });
-

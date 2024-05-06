@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Seat extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'number',
+        'status',
+    ];
+
+    public function theatreSession(){
+        return $this->belongsTo(TheatreSession::class);
+    }
 }
