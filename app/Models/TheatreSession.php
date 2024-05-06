@@ -25,4 +25,9 @@ class TheatreSession extends Model
     {
         return $this->belongsTo(Movie::class);
     }
+
+    public function seats()
+    {
+        return $this->hasMany(Seat::class);
+    }
 }

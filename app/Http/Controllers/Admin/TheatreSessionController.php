@@ -30,8 +30,8 @@ class TheatreSessionController extends Controller
     public function store(StoreTheatreSessionRequest $request, TheatreSessionService $service)
     {
         $theatreSession = TheatreSession::create($request->validated());
-
-        return redirect()->route('admin.theatre-sessions.index')->with('success', 'Theatre Session created successfully');
+        $service->createSeats($theatreSession);
+        return redirect()->route('admin.seats.index', ['theatreSession' => $theatreSession->id]);
     }
 
     public function edit(TheatreSession $theatreSession, TheatreSessionService $service)

@@ -18,6 +18,7 @@
                     <th>Start Time</th>
                     <th>End Time</th>
                     <th>Actions</th>
+                    <th>Seats</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,6 +52,11 @@
                                 <button class="btn btn-ghost btn-xs" onclick="return beforeDelete()">Delete</button>
                             </form>
                         </th>
+                        <td>
+                            <a href="{{ route('admin.seats.index', $session->id) }}"
+                                class="border text-gray-100 border-purple-400 rounded-lg p-2 mb-2 bg-primary">
+                                View</a>
+                        </td>
                     </tr>
                 @endforeach
 
