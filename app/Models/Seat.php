@@ -23,4 +23,9 @@ class Seat extends Model
     {
         return $this->belongsTo(TheatreSession::class);
     }
+
+    public function ticket()
+    {
+        return $this->hasOne('Ticket::class');
+    }
 }

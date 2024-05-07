@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\TheatreController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Customer\MovieController as CustomerMovieController;
 use App\Http\Controllers\Admin\TheatreSessionController;
 use App\Http\Controllers\SeatController;
 use App\Models\Movie;
@@ -22,14 +24,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth', 'na
 
     Route::resource('theatres', TheatreController::class);
 
-    Route::group(['prefix' => 'movies', 'as' => 'movies.'], function(){
+    Route::group(['prefix' => 'movies', 'as' => 'movies.'], function () {
         Route::get('/', [MovieController::class, 'index'])->name('index');
         Route::post('/', [MovieController::class, 'store'])->name('store');
         Route::view('create', "movies.create")->name('create');
         Route::get('{movie}/edit', [MovieController::class, 'edit'])->name('edit');
         Route::put('{movie}', [MovieController::class, 'update'])->name('update');
         Route::delete('{movie}', [MovieController::class, 'delete'])->name('delete');
-    
     });
 
     Route::get('theatre-sessions/{theatreSession}/seats', [SeatController::class, 'index'])->name('seats.index');
@@ -39,5 +40,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth', 'na
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Customer'], function () {
-    Route::get('movies/{movie}/details',[App\Http\Controllers\Customer\MovieController::class,'show'])->name('movies.show');
+    Route::get('movies/{movie}/details', [CustomerMovieController::class, 'show'])->name('movies.show');
 });
+
+// Route::resource('booking', BookingController::class);
+Route::get('theatre-sessions/{theatreSession}/booking', [BookingController::class, 'create'])->name('booking.create');
+Route::post('theatre-sessions/{theatreSession}/booking', [BookingController::class, 'store'])->name('booking.store');

@@ -27,15 +27,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($theatreSessions as $theatreSession)
-                        @if ($theatreSession->available > 0)
+                    {{-- @dump($movie->theatreSessions) --}}
+                    @foreach ($movie->theatreSessions as $theatreSession)
+                        @if ($theatreSession->seats_count > 0)
                             <tr>
                                 <th>{{ $theatreSession->date }}</th>
                                 <td>{{ $theatreSession->theatre->name }}</td>
                                 <td>{{ $theatreSession->start_time }} to {{ $theatreSession->end_time }}</td>
-                                <td>{{ $theatreSession->seats->count() }}</td>
+                                <td>{{ $theatreSession->seats_count }}</td>
                                 <td>
-                                    <form action="/">
+                                    <form action="{{route('booking.create',$theatreSession->id)}}">
 
                                         <button class="button">Book</button>
                                     </form>

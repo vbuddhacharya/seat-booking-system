@@ -125,5 +125,5 @@ return [
 
 
     'show_error' => env('SHOW_ERROR_ON_BLADE', false),
-
+    'ticket_price' => env('TICKET_PRICE', 100),
 ];

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\TheatreSession;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
@@ -27,14 +28,14 @@ class MovieController extends Controller
 
     public function show(Movie $movie)
     {
-        $theatreSessions = $movie->theatreSessions()->orderBy('date')->get();
+        $movie->load([
+            'theatreSessions' => fn ($q) => $q->orderBy('date')
+                ->with('theatre')
+                ->withCount([
+                    'seats' => fn ($q) => $q->where('status', SeatStatus::AVAILABLE)
+                ])
+        ]);
 
-        foreach ($theatreSessions as $theatreSession) {
-            $theatreSession->start_time = Carbon::parse($theatreSession->start_time)->format('H:i');
-            $theatreSession->end_time = Carbon::parse($theatreSession->end_time)->format('H:i');
-            $theatreSession->available = $theatreSession->seats()->where('status', SeatStatus::AVAILABLE->name)->count();
-        }
-
-        return view('customers.movies.show', compact('movie', 'theatreSessions'));
+        return view('customers.movies.show', compact('movie'));
     }
 }
