@@ -1,11 +1,11 @@
 @extends('layout.customer', ['title' => 'Available Movies'])
 
 @section('customer-content')
-    <div class="flex flex-row flex-wrap justify-between">
-        @foreach ($theatreSession as $session)
-            <div class="card card-compact w-3/12 bg-base-100 shadow-xl m-2">
+    <div class="flex flex-row flex-wrap justify-center">
+        @foreach ($theatreSessions as $session)
+            <div class="card card-compact w-1/5 bg-base-100 shadow-xl mx-4 my-2">
                 <figure>
-                    <img src="{{ url('storage/images/' . $session->movie->poster) }}">
+                    <img src="{{$session->movie->poster }}">
                 </figure>
                 <div class="card-body">
                     <h2 class="card-title">{{ $session->movie->name }}</h2>

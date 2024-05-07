@@ -14,9 +14,15 @@ class MovieController extends Controller
 {
     public function index()
     {
-        $theatreSession = TheatreSession::select('movie_id')->where('date', '>=', Carbon::now()->format('Y-m-d'))->where('start_time', '>=', Carbon::now()->format('H:i:s'))->distinct()->paginate(10);
+        $theatreSessions = TheatreSession::select('movie_id')
+            ->where('date', '>=', Carbon::now()->format('Y-m-d'))
+            ->where('start_time', '>=', Carbon::now()->format('H:i:s'))
+            ->where('seats.status', SeatStatus::AVAILABLE->name)
+            ->join('seats', 'seats.theatre_session_id', '=', 'theatre_sessions.id')
+            ->distinct()
+            ->paginate(10);
 
-        return view('index', compact('theatreSession'));
+        return view('index', compact('theatreSessions'));
     }
 
     public function show(Movie $movie)

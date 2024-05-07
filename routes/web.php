@@ -16,7 +16,7 @@ Route::get('register', [UserController::class, 'viewRegister'])->name('register'
 Route::post('login', [UserController::class, 'login'])->name('verify');
 Route::post('register', [UserController::class, 'register'])->name('create');
 Route::post('logout', [UserController::class, 'logout'])->name('logout');
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth', 'namespace' => 'Admin'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth', 'namespace' => 'App\Http\Controllers\Admin'], function () {
 
     Route::view("dashboard", "dashboard")->name('dashboard');
 

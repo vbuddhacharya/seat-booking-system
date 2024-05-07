@@ -4,17 +4,14 @@
 
 @section('customer-content')
     <div>
-        <div class="card lg:card-side bg-base-100 shadow-xl">
-            <figure class=" w-2/5"> <img src="{{ url('storage/images/' . $movie->poster) }}" class="h-auto">
-            </figure>
-            <div class="card-body">
+        <div class="flex w-1/2 m-auto flex-wrap justify-center align-top">
+            <img src="{{ $movie->poster }}" alt="Poster" class=" max-h-80">
+            <div class="bg-white flex flex-col p-3 min-w-60">
                 <h2 class="card-title">{{ $movie->name }}</h2>
                 <div>
                     <span>{{ $movie->release_date }}</span>
                     <span class="badge badge-neutral">{{ $movie->genre }}</span>
-                </div>
-                <div class="card-actions justify-end">
-                    <button class="btn btn-primary">Listen</button>
+
                 </div>
             </div>
         </div>
