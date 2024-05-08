@@ -3,7 +3,9 @@
 namespace App\Observers;
 
 use App\Enums\SeatStatus;
+use App\Jobs\SendTicket;
 use App\Models\Ticket;
+use App\Notifications\TicketBooked;
 use App\Services\BookingService;
 
 class TicketObserver
@@ -20,7 +22,8 @@ class TicketObserver
      */
     public function created(Ticket $ticket): void
     {
-        $ticket->seat->update(['status' => SeatStatus::UNAVAILABLE->name]);
+        $ticket->seat->update(['status'=>SeatStatus::BOOKED->name]);
+        dispatch(new SendTicket($ticket));
     }
 
     /**

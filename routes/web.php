@@ -10,6 +10,9 @@ use App\Http\Controllers\Customer\MovieController as CustomerMovieController;
 use App\Http\Controllers\Admin\TheatreSessionController;
 use App\Http\Controllers\SeatController;
 use App\Models\Movie;
+use App\Models\Ticket;
+use App\Models\User;
+use App\Notifications\TicketBooked;
 
 Route::get('/', [App\Http\Controllers\Customer\MovieController::class, 'index'])->name('index');
 
@@ -45,3 +48,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Customer'], function () {
 
 Route::get('theatre-sessions/{theatreSession}/booking', [BookingController::class, 'create'])->name('booking.create');
 Route::post('theatre-sessions/{theatreSession}/booking', [BookingController::class, 'store'])->name('booking.store');
+
+
+Route::get('preview', function () {
+    $ticket = Ticket::first();
+
+    return (new TicketBooked($ticket))->toMail(User::first());
+});

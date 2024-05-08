@@ -22,7 +22,7 @@ class BookingController extends Controller
 
     public function store(StoreBookingRequest $request)
     {
-        if (Seat::where('id', $request->seat_id)->where('status', SeatStatus::UNAVAILABLE)->exists()) {
+        if (!(Seat::where('id', $request->seat_id)->where('status', SeatStatus::AVAILABLE)->exists())) {
             return redirect()->back()->with('error', 'Please try again');
         }
 
