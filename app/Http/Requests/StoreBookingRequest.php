@@ -22,8 +22,8 @@ class StoreBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'seat' => ['required', 'exists:seats,id'],
-            'name' => ['required'],
+            'seat_id' => ['required', 'exists:seats,id'],
+            'user_name' => ['required', 'string'],
             'email' => ['required', 'email:filter'],
 
         ];

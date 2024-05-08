@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\Admin\TheatreController;
-use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Customer\BookingController;
 use App\Http\Controllers\Customer\MovieController as CustomerMovieController;
 use App\Http\Controllers\Admin\TheatreSessionController;
 use App\Http\Controllers\SeatController;
@@ -43,6 +43,5 @@ Route::group(['namespace' => 'App\Http\Controllers\Customer'], function () {
     Route::get('movies/{movie}/details', [CustomerMovieController::class, 'show'])->name('movies.show');
 });
 
-// Route::resource('booking', BookingController::class);
 Route::get('theatre-sessions/{theatreSession}/booking', [BookingController::class, 'create'])->name('booking.create');
 Route::post('theatre-sessions/{theatreSession}/booking', [BookingController::class, 'store'])->name('booking.store');
