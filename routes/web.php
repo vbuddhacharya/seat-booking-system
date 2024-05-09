@@ -8,17 +8,18 @@ use App\Http\Controllers\Admin\TheatreController;
 use App\Http\Controllers\Admin\TheatreSessionController;
 use App\Http\Controllers\SeatController;
 use App\Models\Movie;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('login', [UserController::class, 'viewLogin'])->name('login');
 Route::get('register', [UserController::class, 'viewRegister'])->name('register');
 Route::post('login', [UserController::class, 'login'])->name('verify');
 Route::post('register', [UserController::class, 'register'])->name('create');
 Route::post('logout', [UserController::class, 'logout'])->name('logout');
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'admin']], function () {
 
     Route::view("dashboard", "dashboard")->name('dashboard');
 
@@ -35,4 +36,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::get('theatre-sessions/{theatreSession}/seats/{seat}/edit', [SeatController::class, 'edit'])->name('seats.edit');
     Route::put('theatre-sessions/{theatreSession}/seats/{seat}', [SeatController::class, 'update'])->name('seats.update');
     Route::resource('theatre-sessions', TheatreSessionController::class);
+});
+
+Route::get('logout',function(){
+    Auth::logout();
 });
