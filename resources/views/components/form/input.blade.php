@@ -7,6 +7,7 @@
     'class' => 'input',
     'value' => null,
     'required' => false,
+    'readonly' => false,
 ])
 
 
@@ -16,7 +17,9 @@
         @endif
     </label>
     <input type={{ $type }} name={{ $name }} id="{{ $name }}" class="{{ $class }}"
-        placeholder="{{ $placeholder }}" value="{{ $value }}">
+        placeholder="{{ $placeholder }}" value="{{ $value }}" @if ($readonly == true)
+            readonly
+        @endif>
 
     @error($name)
         <span class="text-error font-semibold text-sm">{{ $message }}</span>

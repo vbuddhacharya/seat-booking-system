@@ -123,7 +123,4 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-
-    'show_error' => env('SHOW_ERROR_ON_BLADE', false),
-
 ];

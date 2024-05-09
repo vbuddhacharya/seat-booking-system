@@ -41,8 +41,7 @@
                             <div class="flex items-center gap-3">
                                 <div class="avatar">
                                     <div class="mask mask-squircle w-12 h-12">
-                                        <img src="{{ url('storage/images/' . $movie->poster) }}"
-                                            alt="Avatar Tailwind CSS Component" />
+                                        <img src="{{ $movie->poster }}" alt="Avatar Tailwind CSS Component" />
                                     </div>
                                 </div>
                                 <div>

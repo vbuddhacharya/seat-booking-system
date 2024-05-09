@@ -26,7 +26,7 @@
     </div>
 @endif
 
-@if ($errors->any() && config('app.show_error'))
+@if ($errors->any() && config('tickets.show_error'))
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
