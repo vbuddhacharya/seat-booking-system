@@ -14,16 +14,13 @@ class TicketObserver
         $service = new BookingService();
         $ticket->code = $service->getTicketCode();
     }
+
     /**
      * Handle the Ticket "created" event.
      */
     public function created(Ticket $ticket): void
     {
-        // $ticket->seat->status = SeatStatus::UNAVAILABLE->name;
-
-        // $ticket->seat->save();
-        $ticket->seat->update(['status'=>SeatStatus::UNAVAILABLE->name]);
-
+        $ticket->seat->update(['status' => SeatStatus::UNAVAILABLE->name]);
     }
 
     /**

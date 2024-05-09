@@ -15,7 +15,7 @@ class BookingController extends Controller
     public function create(TheatreSession $theatreSession)
     {
         $seats = $theatreSession->seats()->where('status', SeatStatus::AVAILABLE->name)->pluck('number', 'id');
-        $ticket = config('app.ticket_price');
+        $ticket = config('tickets.ticket_price');
 
         return view('bookings.create', compact('theatreSession', 'seats', 'ticket'));
     }

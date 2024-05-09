@@ -27,7 +27,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @dump($movie->theatreSessions) --}}
                     @foreach ($movie->theatreSessions as $theatreSession)
                         @if ($theatreSession->seats_count > 0)
                             <tr>
@@ -36,7 +35,7 @@
                                 <td>{{ $theatreSession->start_time }} to {{ $theatreSession->end_time }}</td>
                                 <td>{{ $theatreSession->seats_count }}</td>
                                 <td>
-                                    <form action="{{route('booking.create',$theatreSession->id)}}">
+                                    <form action="{{ route('booking.create', $theatreSession->id) }}">
 
                                         <button class="button">Book</button>
                                     </form>
