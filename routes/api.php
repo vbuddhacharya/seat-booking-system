@@ -8,4 +8,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/theatre-sessions/{theatreSession}/seats', [SeatController::class,'index'])->name('seats.index');
+Route::get('/theatre-sessions/{theatreSession}/seats', [SeatController::class,'availableSeats'])->name('seats.index');

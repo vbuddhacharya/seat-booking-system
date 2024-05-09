@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Seat;
 use App\Models\TheatreSession;
 use App\Enums\SeatStatus;
+use App\Http\Resources\SeatResource;
 
 class SeatController extends Controller
 {
@@ -40,5 +41,12 @@ class SeatController extends Controller
         $seat->update($request->validated());
 
         return redirect()->route('admin.seats.index', $seat->theatre_session_id)->with('success', 'Seat updated successfully!');
+    }
+
+    public function availableSeats(string $id)
+    {
+        $seatCount = Seat::where('theatre_session_id', $id)->where('status', SeatStatus::AVAILABLE->name)->get();
+
+        return SeatResource::collection($seatCount);
     }
 }
