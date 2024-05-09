@@ -1,18 +1,18 @@
 <?php
 
 return [
-    'ticket_purchase'=>[
-        "success"=><<<EOF
-        You have succesfully purchased ticket through :service_name
+    'ticket_purchase' => [
+        "success" => <<<EOF
+        You have succesfully purchased ticket through :serviceName
 
-        Your ticket code is <u>**:ticket_code**</u>.
+        Your ticket code is <u>**:ticketCode**</u>.
 
-        Movie Name: **:movie**
+        Movie Name: **:movieName**
 
         Date: :date <br>
-        Show Time: :start_time to :end_time
+        Show Time: :startTime to :endTime
 
-        Seat Number: :seat_number
+        Seat Number: :seatNumber
 
         Please bring this ticket with you.
         EOF

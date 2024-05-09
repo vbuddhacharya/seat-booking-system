@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Data\TicketMailData;
 use App\Models\Ticket;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,13 +16,14 @@ class TicketBooked extends Notification
     use Queueable;
 
     private $ticket;
+    private ?TicketMailData $ticketData = null;
     /**
      * Create a new notification instance.
      */
     public function __construct(Ticket $ticket)
     {
         $this->ticket = $ticket;
-        // $ticket->load('seat.theatreSession');
+        $ticketData = new TicketMailData($ticket);
     }
 
     /**
@@ -39,18 +41,12 @@ class TicketBooked extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $ticketData = new TicketMailData($this->ticket);
+
         return (new MailMessage)
             ->subject('Ticket Booked')
-            ->greeting("Hello " . $this->ticket->user_name.",")
-            ->line(new HtmlString(Str::markdown(__('notifications.ticket_purchase.success', [
-                'service_name' => "Tickets!",
-                'ticket_code' => $this->ticket->code,
-                'movie' => $this->ticket->seat->theatreSession->movie->name,
-                'date' => $this->ticket->seat->theatreSession->date,
-                'start_time' => $this->ticket->seat->theatreSession->start_time,
-                'end_time' => $this->ticket->seat->theatreSession->end_time,
-                'seat_number' => $this->ticket->seat->number
-            ]))));
+            ->greeting("Hello " . $this->ticket->user_name . ",")
+            ->line(new HtmlString(Str::markdown(__('notifications.ticket_purchase.success', $ticketData?->toArray() ?? []))));
     }
 
     /**
