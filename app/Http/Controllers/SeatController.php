@@ -17,8 +17,10 @@ class SeatController extends Controller
 
     public function index($theatreSession)
     {
-        $seats = Seat::where('theatre_session_id', $theatreSession)->paginate(10);
-        return view('seats.index', compact('seats'));
+        $seats = Seat::where('theatre_session_id', $theatreSession)->with('theatreSession')->paginate(10);
+        $available = Seat::where('theatre_session_id', $theatreSession)->where('status', SeatStatus::AVAILABLE)->count();
+        $booked = Seat::where('theatre_session_id', $theatreSession)->where('status', SeatStatus::BOOKED)->count();
+        return view('seats.index', compact('seats','available','booked'));
     }
 
     public function edit(TheatreSession $theatreSession, Seat $seat)
